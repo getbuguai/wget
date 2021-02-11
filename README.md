@@ -19,14 +19,14 @@ cd wget && go build
 go get -u github.com/getbuguai/wget
 
 ```
-### 使用方式
+## 使用方式
 
 wget https://cdn.jsdelivr.net/gh/getbuguai/flutter-app1/assets/img/git.jpg
 
-### 赞助
+## 赞助
 
 <details>
-    <summary>支付宝</summary>
+  <summary>支付宝</summary>
    <img src="https://cdn.jsdelivr.net/gh/getbuguai/getbuguai/zhifubao.jpg"
      alt="支付宝收款">
      加载失败访问: https://cdn.jsdelivr.net/gh/getbuguai/getbuguai/zhifubao.jpg
@@ -44,7 +44,7 @@ wget https://cdn.jsdelivr.net/gh/getbuguai/flutter-app1/assets/img/git.jpg
 > 默认为请作者喝杯奶茶  
 > 感谢投喂 !!! 
 
-### 找到我：这个程序不太乖 
+## 找到我：这个程序不太乖 
 
 - BiliBili 主页: [https://space.bilibili.com/278413353 ](https://space.bilibili.com/278413353)
 - GitHub 主页: [https://github.com/getbuguai](https://github.com/getbuguai) 
