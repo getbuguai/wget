@@ -16,7 +16,7 @@ git clone https://github.com/getbuguai/wget.git
 cd wget && go build 
 
 # 以工具包的形式, 会自动安装到 GOBIN
-go get -u https://github.com/getbuguai/wget
+go get -u github.com/getbuguai/wget
 
 ```
 ### 使用方式
