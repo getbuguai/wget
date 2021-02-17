@@ -1,9 +1,9 @@
-# wget
-一个简易的 wget 下载小工具。
+# wget 
+一个简易的 wget 下载小工具，支持所有 http 格式的文件下载，如果不支持，你可以补充一下。
 
 ## 背景
 
-windows 上 命令行不能下载文件，或者我不知道怎么下载。
+windows 上命令行不能下载文件，或者我不知道怎么下载。
 
 于是就写了一个简单的下载工具。
 
@@ -22,6 +22,29 @@ go get -u github.com/getbuguai/wget
 ## 使用方式
 
 wget https://cdn.jsdelivr.net/gh/getbuguai/flutter-app1/assets/img/git.jpg
+
+## 贡献
+
+代码支持进行拓展，可以为指定网站指定下载方式。
+
+具体的实现就是实现一下接口:
+
+```go
+// UrlFilterInterface 特定网站的下载方式接口
+type UrlFilterInterface interface {
+	// GetSavePath 文件保存的路径包含文件名
+	GetSavePath(url string) string
+	// FilterHostName 过滤的域名的 HOSTS
+	FilterHostName() string
+	// ClientDo 获取下载的文件
+	ClientDo(ctx context.Context, url string) (body []byte, err error)
+	// FilterUrl url 的处理，如 a.com --> b.com
+	FilterUrl(oldURL string) (newURL string, err error)
+	// 完成以上 接口之后 使用 init 函数 在 FilterUrlMap 中进行注册
+}
+```
+
+> 默认情况使用 default_wget 中的下载方式。
 
 ## 赞助
 

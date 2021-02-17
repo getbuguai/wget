@@ -28,13 +28,20 @@ func init() {
 	}
 }
 
+// UrlFilterInterface 特定网站的下载方式接口
 type UrlFilterInterface interface {
+	// GetSavePath 文件保存的路径包含文件名
 	GetSavePath(url string) string
+	// FilterHostName 过滤的域名的 HOSTS
 	FilterHostName() string
+	// ClientDo 获取下载的文件
 	ClientDo(ctx context.Context, url string) (body []byte, err error)
+	// FilterUrl url 的处理，如 a.com --> b.com
 	FilterUrl(oldURL string) (newURL string, err error)
+	// 完成以上 接口之后 使用 init 函数 在 FilterUrlMap 中进行注册
 }
 
+// DoWget 开始执行
 func DoWget(ctx context.Context, urlLink string) error {
 
 	if FilterUrlMap == nil {
