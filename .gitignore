@@ -12,10 +12,16 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
+temp/
 
 # 图片
 *.jpg
 *.jpeg
 *.png
 
+# 视频
+*.mp3
+
+.idea/
+p0034kb6xgx.mp4
