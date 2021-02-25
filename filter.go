@@ -10,14 +10,26 @@ import (
 	"path/filepath"
 )
 
-// FilterUrlMap 过滤网站 的 列表
-var FilterUrlMap map[string]UrlFilterInterface
+// filterUrlMap 过滤网站 的 列表
+var filterUrlMap map[string]UrlFilterInterface
 var WgetPwd string
 
-func init() {
-	if FilterUrlMap == nil {
-		FilterUrlMap = map[string]UrlFilterInterface{}
+// GetFilterUrlMap 获取全局的 FilterUrlMap
+func GetFilterUrlMap() map[string]UrlFilterInterface {
+	if filterUrlMap == nil {
+		filterUrlMap = map[string]UrlFilterInterface{}
 	}
+	return filterUrlMap
+}
+
+// Register url 链接的注册
+func Register(name string, filter UrlFilterInterface) {
+	filterUrlMap = GetFilterUrlMap()
+	filterUrlMap[name] = filter
+}
+
+func init() {
+	filterUrlMap = GetFilterUrlMap()
 
 	var err error
 	// 当前路径
@@ -44,7 +56,7 @@ type UrlFilterInterface interface {
 // DoWget 开始执行
 func DoWget(ctx context.Context, urlLink string) error {
 
-	if FilterUrlMap == nil {
+	if filterUrlMap == nil {
 		panic("初始化失败 。。。 ")
 	}
 
@@ -57,9 +69,9 @@ func DoWget(ctx context.Context, urlLink string) error {
 		return err
 	}
 
-	fWget, ok := FilterUrlMap[uu.Host].(UrlFilterInterface)
+	fWget, ok := filterUrlMap[uu.Host].(UrlFilterInterface)
 	if !ok {
-		fWget = FilterUrlMap[DefaultWgetHostName]
+		fWget = filterUrlMap[DefaultWgetHostName]
 	}
 
 	savePath := fWget.GetSavePath(urlLink)

@@ -12,10 +12,7 @@ import (
 )
 
 func init() {
-	if FilterUrlMap == nil {
-		FilterUrlMap = make(map[string]UrlFilterInterface)
-	}
-	FilterUrlMap[DefaultWgetHostName] = DefaultWget{}
+	Register(DefaultWgetHostName, DefaultWget{})
 }
 
 const DefaultWgetHostName = "default"
