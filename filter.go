@@ -8,11 +8,14 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"sync"
 )
 
 // filterUrlMap 过滤网站 的 列表
+// TODO filterUrlMap 和 sync 可以组合成结构体统一使用
 var filterUrlMap map[string]UrlFilterInterface
 var WgetPwd string
+var syn sync.Mutex
 
 // GetFilterUrlMap 获取全局的 FilterUrlMap
 func GetFilterUrlMap() map[string]UrlFilterInterface {
@@ -24,6 +27,8 @@ func GetFilterUrlMap() map[string]UrlFilterInterface {
 
 // Register url 链接的注册
 func Register(name string, filter UrlFilterInterface) {
+	syn.Lock()
+	defer syn.Unlock()
 	filterUrlMap = GetFilterUrlMap()
 	filterUrlMap[name] = filter
 }
